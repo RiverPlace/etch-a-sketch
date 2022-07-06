@@ -1,0 +1,15 @@
+body {
+    background-color: #444;
+    color: white;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.grid {
+    display: grid;
+    width: 500px;
+    height: 500px;
+}
