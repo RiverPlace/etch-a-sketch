@@ -13,20 +13,35 @@ const colorMode = document.getElementById('color-mode');
 const rainbowMode = document.getElementById('rainbow-mode');
 const eraserMode = document.getElementById('eraser-mode');
 
-let grid = document.querySelector('.grid');
-
-slider.addEventListener('input', (e) => updateColor);
-colorPicker.addEventListener('input', (e) => currentColor = e.target.value);
-colorMode.addEventListener('click', () => currentMode = 'color');
+colorPicker.addEventListener('input', (e) => updateColor(e.target.value));
+colorMode.addEventListener('click', enableColorMode);
 rainbowMode.addEventListener('click', () => currentMode = 'rainbow');
-eraserMode.addEventListener('click', () => currentMode = 'eraser');
-clearBtn.addEventListener('click', () => clearGrid);
+eraserMode.addEventListener('click', enableErasermode);
+clearBtn.addEventListener('click', clearGrid);
+slider.addEventListener('input', (e) => updateGridSize(e));
 
-function updateColor(e) {
-    currentColor = e.target.value;
+function updateColor(newColor) {
+    currentColor = newColor;
+}
+
+function updateGridSize(e) {
+    let gridSize = document.getElementById('grid-size');
+    gridSize.value = e.target.value;
+    initGrid(e.target.value);
+}
+
+function enableColorMode() {
+    currentMode = 'color';
+    updateColor(colorPicker.value);
+}
+
+function enableErasermode() {
+    currentMode = 'eraser';
+    currentColor = 'white';
 }
 
 function initGrid(size) {
+    let grid = document.querySelector('.grid');
     grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
     grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
 
@@ -36,7 +51,7 @@ function initGrid(size) {
         square.classList.add('square');
         square.addEventListener('mousedown', function(e) {
             e.target.style.backgroundColor = currentColor;
-        })
+        });
         grid.insertAdjacentElement('beforeend', square);
     }
 }
@@ -48,16 +63,13 @@ function clearGrid() {
     }
 }
 
-slider.addEventListener('input', (e) => {
-    let gridSize = document.getElementById('grid-size');
-    gridSize.value = e.target.value;
-    initGrid(e.target.value);
-});
-
-
-function activeButton(mode) {
+function activeButton(newMode) {
     if (currentMode === 'color') {
-
+        colorMode.classList.add('active');
+    } else if (currentMode === 'rainbow') {
+        colorMode.classList.add('active');
+    } else if (currentMode === 'eraser') {
+        colorMode.classList.add('active');
     }
 }
 
