@@ -1,5 +1,5 @@
 const DEFAULT_MODE = 'color';
-const DEFAULT_COLOR = '#444';
+const DEFAULT_COLOR = 'black';
 const DEFAULT_SIZE = 16;
 
 let currentMode = DEFAULT_MODE;
@@ -10,13 +10,13 @@ const clearBtn = document.getElementById('clear');
 const slider = document.getElementById('slider');
 const colorPicker = document.getElementById('color-picker');
 const colorMode = document.getElementById('color-mode');
-const rainbowMode = document.getElementById('rainbow-mode');
+const randomMode = document.getElementById('random-mode');
 const eraserMode = document.getElementById('eraser-mode');
 
 colorPicker.addEventListener('input', (e) => updateColor(e.target.value));
 colorMode.addEventListener('click', enableColorMode);
-rainbowMode.addEventListener('click', () => currentMode = 'rainbow');
-eraserMode.addEventListener('click', enableErasermode);
+randomMode.addEventListener('click', enableRandomMode);
+eraserMode.addEventListener('click', enableEraserMode);
 clearBtn.addEventListener('click', clearGrid);
 slider.addEventListener('input', (e) => updateGridSize(e));
 
@@ -33,11 +33,26 @@ function updateGridSize(e) {
 function enableColorMode() {
     currentMode = 'color';
     updateColor(colorPicker.value);
+    updateActiveButton();
 }
 
-function enableErasermode() {
+function enableRandomMode() {
+    const hexValues = [0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F'];
+    let hex = '#';
+    for (let i = 0; i < 6; i++) {
+        let index = Math.floor(Math.random() * hexValues.length);
+        hex += hexValues[index];
+    }
+    currentMode = 'rainbow';
+    currentColor = hex;
+    colorPicker.value = hex;
+    updateActiveButton();
+}
+
+function enableEraserMode() {
     currentMode = 'eraser';
-    currentColor = 'white';
+    updateColor('white');
+    updateActiveButton();
 }
 
 function initGrid(size) {
@@ -63,13 +78,18 @@ function clearGrid() {
     }
 }
 
-function activeButton(newMode) {
+function updateActiveButton() {
+    let buttons = document.getElementsByClassName('button');
+    for (let button of buttons) {
+        button.classList.remove('active');
+    }
+
     if (currentMode === 'color') {
         colorMode.classList.add('active');
     } else if (currentMode === 'rainbow') {
-        colorMode.classList.add('active');
+        randomMode.classList.add('active');
     } else if (currentMode === 'eraser') {
-        colorMode.classList.add('active');
+        eraserMode.classList.add('active');
     }
 }
 
