@@ -6,6 +6,20 @@ body {
 .container {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-grid-container {
+    display: flex;
+    width: 800px;
+    justify-content: space-between;
+}
+
+.settings,
+.slidercontainer {
+    display: flex;
+    flex-direction: column;
 }
 
 .grid {
