@@ -10,6 +10,10 @@ body {
     justify-content: center;
 }
 
+h1 {
+    font-size: 56px;
+}
+
 .settings-grid-container {
     display: flex;
     width: 800px;
@@ -28,7 +32,22 @@ body {
     height: 500px;
 }
 
+button {
+    background-color: aliceblue;
+    font-size: 24px;
+    border: 0;
+    border-radius: 5px;
+    padding: 4px;
+    margin: 0 0 16px 0;
+}
+
 button.active {
     background-color: aliceblue;
     color: #444;
+}
+
+#color-picker {
+    height: 56px;
+    width: 92px;
+    margin-bottom: 16px;
 }
