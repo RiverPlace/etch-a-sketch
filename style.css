@@ -1,6 +1,7 @@
 body {
     background-color: #444;
     color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .container {
@@ -12,6 +13,7 @@ body {
 
 h1 {
     font-size: 56px;
+    color: #EFEFEF;
 }
 
 .settings-grid-container {
@@ -26,6 +28,16 @@ h1 {
     flex-direction: column;
 }
 
+#grid-size {
+    width: 54px;
+    color: white;
+    background-color: transparent;
+    font-size: 24px;
+    resize: none;
+    outline: none;
+    border: none;
+}
+
 .grid {
     display: grid;
     width: 500px;
@@ -33,17 +45,24 @@ h1 {
 }
 
 button {
-    background-color: aliceblue;
+    background-color: EFEFEF;
     font-size: 24px;
     border: 0;
     border-radius: 5px;
     padding: 4px;
     margin: 0 0 16px 0;
+    color: #444;
 }
 
 button.active {
     background-color: aliceblue;
     color: #444;
+}
+
+.color-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #color-picker {
