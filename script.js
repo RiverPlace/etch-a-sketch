@@ -18,6 +18,10 @@ eraserMode.addEventListener('click', enableEraserMode);
 clearBtn.addEventListener('click', clearGrid);
 slider.addEventListener('input', (e) => updateGridSize(e));
 
+let mouseDown = false
+document.body.onmousedown = () => (mouseDown = true)
+document.body.onmouseup = () => (mouseDown = false)
+
 function updateColor(newColor) {
     currentColor = newColor;
 }
@@ -62,11 +66,15 @@ function initGrid(size) {
         let square = document.createElement('div');
         square.style.backgroundColor = 'white';
         square.classList.add('square');
-        square.addEventListener('mousedown', function(e) {
-            e.target.style.backgroundColor = currentColor;
-        });
+        square.addEventListener('mousedown', colorGrid);
+        square.addEventListener('mouseover', colorGrid);
         grid.insertAdjacentElement('beforeend', square);
     }
+}
+
+function colorGrid(e) {
+    if (e.type === 'mouseover' && !mouseDown) return;
+    e.target.style.backgroundColor = currentColor;
 }
 
 function clearGrid() {
