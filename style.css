@@ -27,3 +27,8 @@ body {
     width: 500px;
     height: 500px;
 }
+
+button.active {
+    background-color: aliceblue;
+    color: #444;
+}
